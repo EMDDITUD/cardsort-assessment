@@ -1,0 +1,25 @@
+{
+  "name": "@sortiertool/server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Backend (Fastify + node:sqlite) für das ML-Sortiertool",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "db": "sqlite3 data/ml-sortiertool.sqlite"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.2.0",
+    "@fastify/static": "^8.2.0",
+    "@sortiertool/shared": "*",
+    "fastify": "^5.8.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  },
+  "license": "AGPL-3.0-or-later"
+}

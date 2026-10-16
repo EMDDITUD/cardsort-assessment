@@ -1,0 +1,17 @@
+{
+  "name": "@sortiertool/shared",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Geteiltes Datenmodell, Kartensatz, Referenzschemata und Auswertungslogik (Client + Server)",
+  "exports": {
+    "./types": "./types.ts",
+    "./constants": "./constants.ts",
+    "./cooccurrence": "./cooccurrence.ts",
+    "./analysis": "./analysis.ts",
+    "./cards.json": "./cards.json",
+    "./schemas.json": "./schemas.json",
+    "./name-markers.json": "./name-markers.json"
+  },
+  "license": "AGPL-3.0-or-later AND CC-BY-4.0"
+}

@@ -1,0 +1,50 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "ML-Sortiertool"
+license: AGPL-3.0-or-later
+version: 1.0.0
+date-released: "2026-10-16"
+repository-code: "https://github.com/EMDDITUD/cardsort-assessment"
+# Uncomment once a software release has been archived on Zenodo:
+# doi: "10.5281/zenodo.XXXXXXX"
+abstract: >-
+  A digital card sorting tool for the formative assessment of students'
+  understanding of machine learning concepts. Learners freely group short
+  problem descriptions; a teacher dashboard compares their sortings with
+  expert structures based on deep (learning method) and surface features.
+keywords:
+  - card sorting
+  - formative assessment
+  - machine learning
+  - AI education
+  - computing education
+authors:
+  - family-names: Marx
+    given-names: Erik
+    orcid: "https://orcid.org/0000-0002-5918-804X"
+    affiliation: "Center for Scalable Data Analytics and Artificial Intelligence (ScaDS.AI) Dresden/Leipzig, TUD Dresden University of Technology"
+  - family-names: Witt
+    given-names: Clemens
+    orcid: "https://orcid.org/0009-0005-8160-4029"
+    affiliation: "TUD Dresden University of Technology"
+references:
+  - type: data
+    title: "ML-Sortiertool card set"
+    abstract: >-
+      Card texts, card images, reference schemas and coding scheme bundled
+      with the software (see REUSE.toml for the exact files).
+    authors:
+      - family-names: Marx
+        given-names: Erik
+        orcid: "https://orcid.org/0000-0002-5918-804X"
+      - family-names: Witt
+        given-names: Clemens
+        orcid: "https://orcid.org/0009-0005-8160-4029"
+      - family-names: Schäfer
+        given-names: Konrad
+        # orcid: "https://orcid.org/XXXX-XXXX-XXXX-XXXX"
+    year: 2026
+    license: CC-BY-4.0
+    # Uncomment once the card set has been archived (e.g. on Zenodo):
+    # doi: "10.5281/zenodo.XXXXXXX"

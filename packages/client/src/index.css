@@ -1,0 +1,53 @@
+:root {
+  --brand: #2e7d32;
+  --brand-dark: #1b5e20;
+  --brand-tint: #e8f3ea;
+
+  --ink: #1b2a22;
+  --ink-soft: #5c6b63;
+  --line: #e3e8e4;
+  --bg: #eef1ee;
+  --surface: #ffffff;
+
+  --danger: #c62828;
+  --danger-tint: #fdecec;
+
+  --radius: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 3px rgba(20, 40, 28, 0.12);
+  --shadow-md: 0 4px 16px rgba(20, 40, 28, 0.14);
+  --shadow-lg: 0 10px 34px rgba(20, 40, 28, 0.18);
+
+  --font: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Zur Laufzeit von SortingView gesetzt. --ui-scale folgt der Kartengröße (Stapel),
+     --chrome-scale hat eine Untergrenze, damit Tap-Buttons greifbar bleiben. */
+  --ui-scale: 1;
+  --chrome-scale: 1;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}

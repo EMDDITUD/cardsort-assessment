@@ -1,0 +1,206 @@
+[
+  {
+    "id": "A",
+    "short": {
+      "de": "Spam",
+      "en": "Spam"
+    },
+    "image": "/cards/spam.jpg",
+    "text": {
+      "de": "Ein Industriezulieferer erhält täglich hunderte E-Mails mit Anfragen, Bestellungen, aber auch Spam. Ein System soll jede Mail automatisch in eine dieser Kategorien einsortieren.",
+      "en": "An industrial supplier receives hundreds of e-mails every day with enquiries, orders, but also spam. A system sorts each e-mail automatically into one of these categories."
+    },
+    "features": {
+      "lernverfahren": "klassifikation",
+      "domaene": "industrie",
+      "darstellung": "text"
+    }
+  },
+  {
+    "id": "B",
+    "short": {
+      "de": "Roboter",
+      "en": "Robot"
+    },
+    "image": "/cards/roboter.jpg",
+    "text": {
+      "de": "Ein humanoider Industrieroboter bewegt sich zu einem Ziel und optimiert dabei seine Haltung und Fortbewegung anhand von Sensordaten.",
+      "en": "A humanoid industrial robot moves toward a target location and, in doing so, optimises its posture and movement based on sensor data."
+    },
+    "features": {
+      "lernverfahren": "verstaerkend",
+      "domaene": "industrie",
+      "darstellung": "strukturiert"
+    }
+  },
+  {
+    "id": "C",
+    "short": {
+      "de": "Vogelstimmen",
+      "en": "Bird calls"
+    },
+    "image": "/cards/vogel.jpg",
+    "text": {
+      "de": "Ein System soll Audioaufnahmen in einem Naturschutzgebiet einer von 50 bekannten Vogelarten zuordnen.",
+      "en": "A system assigns audio recordings in a nature reserve to one of 50 known bird species."
+    },
+    "features": {
+      "lernverfahren": "klassifikation",
+      "domaene": "natur",
+      "darstellung": "audio"
+    }
+  },
+  {
+    "id": "D",
+    "short": {
+      "de": "Herztöne",
+      "en": "Heart sounds"
+    },
+    "image": "/cards/herztoene.jpg",
+    "text": {
+      "de": "Ein System findet in Herztonaufnahmen akustische Gemeinsamkeiten, um so selbstständig verschiedene Tonkategorien und somit Krankheitsbilder zu entdecken.",
+      "en": "A system identifies acoustic patterns in heart sound recordings to autonomously discover distinct sound categories and thus associated clinical conditions."
+    },
+    "features": {
+      "lernverfahren": "clustering",
+      "domaene": "gesundheit",
+      "darstellung": "audio"
+    }
+  },
+  {
+    "id": "E",
+    "short": {
+      "de": "Geschwindigkeit",
+      "en": "Speed"
+    },
+    "image": "/cards/geschwindigkeit.jpg",
+    "text": {
+      "de": "Ein System wertet Fahrgeräusche aus Tonaufnahmen am Straßenrand aus und gibt die Geschwindigkeit (in km/h) an.",
+      "en": "A system analyses driving noises from roadside audio recordings and states the vehicle's speed (in km/h)."
+    },
+    "features": {
+      "lernverfahren": "regression",
+      "domaene": "verkehr",
+      "darstellung": "audio"
+    }
+  },
+  {
+    "id": "F",
+    "short": {
+      "de": "Chatbot",
+      "en": "Chatbot"
+    },
+    "image": "/cards/chatbot.jpg",
+    "text": {
+      "de": "Ein Chatbot zur Erklärung von Krankheitssymptomen wird von Ärzten mit Daumen hoch/runter verbessert.",
+      "en": "A chatbot that explains disease symptoms is improved by doctors giving it a thumbs up or thumbs down."
+    },
+    "features": {
+      "lernverfahren": "verstaerkend",
+      "domaene": "gesundheit",
+      "darstellung": "text"
+    }
+  },
+  {
+    "id": "H",
+    "short": {
+      "de": "Spurwechsel",
+      "en": "Lane change"
+    },
+    "image": "/cards/spurwechsel.jpg",
+    "text": {
+      "de": "Ein Auto entscheidet anhand von Bildaufnahmen der Umgebung fortlaufend, ob es beschleunigt, bremst oder lenkt, um auf der Autobahn die Spur zu wechseln.",
+      "en": "Based on camera images of its surroundings, a car continuously decides whether to accelerate, brake or steer in order to change lanes on the motorway."
+    },
+    "features": {
+      "lernverfahren": "verstaerkend",
+      "domaene": "verkehr",
+      "darstellung": "grafik"
+    }
+  },
+  {
+    "id": "I",
+    "short": {
+      "de": "Schadensmeldungen",
+      "en": "Insurance claims"
+    },
+    "image": "/cards/unfallmeldung.jpg",
+    "text": {
+      "de": "Ein System ermittelt in Schadensmeldungen eines Autoversicherers anhand von Angaben zu Fahrer, Fahrzeug und Verkehrssituation bisher unbekannte Risikogruppen.",
+      "en": "Using details on the driver, the vehicle and the traffic situation, a system identifies previously unknown risk groups in the claim reports of a car insurer."
+    },
+    "features": {
+      "lernverfahren": "clustering",
+      "domaene": "verkehr",
+      "darstellung": "strukturiert"
+    }
+  },
+  {
+    "id": "J",
+    "short": {
+      "de": "Messer",
+      "en": "Blade"
+    },
+    "image": "/cards/messer.jpg",
+    "text": {
+      "de": "Eine Kamera liefert Aufnahmen der Schneidekante eines Messers. Ein System wertet die Abnutzungsmuster auf diesen Bildern aus, um die verbleibende Lebensdauer des Messers abzuschätzen.",
+      "en": "A camera provides images of the cutting edge of a blade. A system evaluates the wear patterns in these images to estimate the blade's remaining lifespan."
+    },
+    "features": {
+      "lernverfahren": "regression",
+      "domaene": "industrie",
+      "darstellung": "grafik"
+    }
+  },
+  {
+    "id": "K",
+    "short": {
+      "de": "Wildtier",
+      "en": "Wildlife"
+    },
+    "image": "/cards/wildtier.jpg",
+    "text": {
+      "de": "Ein System sucht in den Gästebucheinträgen eines Nationalparks eigenständig nach Ähnlichkeiten. Einträge, die zu keiner Gruppe passen, deuten auf die Sichtung einer seltenen Tierart hin.",
+      "en": "A system independently searches the guestbook entries of a national park for similarities. Entries that do not fit into any group indicate a sighting of a rare animal species."
+    },
+    "features": {
+      "lernverfahren": "clustering",
+      "domaene": "natur",
+      "darstellung": "text"
+    }
+  },
+  {
+    "id": "L",
+    "short": {
+      "de": "EKG",
+      "en": "ECG"
+    },
+    "image": "/cards/ekg.jpg",
+    "text": {
+      "de": "Anhand der grafischen Wellenverläufe von EKG-Aufzeichnungen gibt ein System eine Diagnose, ob und welche Herzrhythmusstörung vorliegen könnte.",
+      "en": "Using the graphical waveforms of ECG recordings, a system diagnoses the presence and specific type of cardiac arrhythmia."
+    },
+    "features": {
+      "lernverfahren": "klassifikation",
+      "domaene": "gesundheit",
+      "darstellung": "grafik"
+    }
+  },
+  {
+    "id": "M",
+    "short": {
+      "de": "Wasserstand",
+      "en": "Water level"
+    },
+    "image": "/cards/wasserstand.jpg",
+    "text": {
+      "de": "Basierend auf aktuellen Messwerten zu Niederschlag, Bodenfeuchtigkeit und Schneeschmelze berechnet ein System den exakten Wasserstand eines Flusses für die nächsten 24 Stunden im Voraus.",
+      "en": "Based on current measurement data for rain fall, soil moisture, and snowmelt, a system calculates the exact water level of a river 24 hours in advance."
+    },
+    "features": {
+      "lernverfahren": "regression",
+      "domaene": "natur",
+      "darstellung": "strukturiert"
+    }
+  }
+]

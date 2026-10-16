@@ -1,0 +1,18 @@
+version = 1
+
+# Codebase: AGPL-3.0-or-later.
+[[annotations]]
+path = "**"
+SPDX-FileCopyrightText = "2026 Erik Marx, Clemens Witt"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# Educational content: CC BY 4.0.
+[[annotations]]
+path = [
+  "packages/shared/cards.json",
+  "packages/shared/schemas.json",
+  "packages/shared/name-markers.json",
+  "packages/client/public/cards/**",
+]
+SPDX-FileCopyrightText = "2026 Erik Marx, Clemens Witt, Konrad Schäfer"
+SPDX-License-Identifier = "CC-BY-4.0"

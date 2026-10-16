@@ -1,0 +1,39 @@
+{
+  "types": [
+    {
+      "key": "prozess",
+      "label": { "de": "Prozess", "en": "Process" },
+      "color": "#0f766e",
+      "stems": [
+        "sortier", "zuordn", "einordn", "einteil", "vorhers", "voraus", "prognos", "lern", "optimi",
+        "klassifi", "kategori", "gruppier", "cluster", "erkenn", "regress", "berechn", "schätz",
+        "bewert", "entscheid", "verstärk", "belohn", "ähnlich", "muster", "trainier", "auswert",
+        "sort", "classif", "categori", "group", "predict", "forecast", "estimat", "learn", "optim",
+        "recogn", "reinforc", "reward", "similar", "pattern", "train"
+      ]
+    },
+    {
+      "key": "domaene",
+      "label": { "de": "Anwendungsdomäne", "en": "Application domain" },
+      "color": "#b45309",
+      "stems": [
+        "medizin", "gesund", "krank", "herz", "arzt", "patient", "verkehr", "fahr", "straße",
+        "ampel", "natur", "umwelt", "tier", "vogel", "wetter", "wasser", "industr", "wirtschaft",
+        "fabrik", "firma", "unternehm", "kunde", "arbeit", "medic", "health", "hospital", "traffic",
+        "vehicle", "car", "nature", "environment", "animal", "bird", "industry", "business",
+        "company", "customer"
+      ]
+    },
+    {
+      "key": "darstellung",
+      "label": { "de": "Darstellungsform", "en": "Data representation" },
+      "color": "#6d28d9",
+      "stems": [
+        "audio", "akust", "ton", "tön", "geräusch", "klang", "hör", "bild", "foto", "kamera",
+        "grafik", "video", "visuell", "text", "schrift", "sprache", "zahl", "tabell", "sensor",
+        "sound", "acoustic", "noise", "image", "picture", "photo", "camera", "graphic", "visual",
+        "written", "language", "number", "numeric", "table"
+      ]
+    }
+  ]
+}

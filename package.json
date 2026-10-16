@@ -1,0 +1,22 @@
+{
+  "name": "ml-sortiertool",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,green \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:client": "npm run dev -w @sortiertool/client",
+    "dev:server": "npm run dev -w @sortiertool/server",
+    "build": "npm run build -w @sortiertool/client",
+    "start": "npm run start -w @sortiertool/server",
+    "lint": "npm run lint -w @sortiertool/client",
+    "typecheck": "npm run typecheck -w @sortiertool/server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "license": "AGPL-3.0-or-later AND CC-BY-4.0"
+}

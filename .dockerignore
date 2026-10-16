@@ -1,0 +1,26 @@
+# Hält den Build-Kontext klein — alles hier wird nie an den Docker-Daemon gesendet.
+node_modules
+**/node_modules
+dist
+**/dist
+.git
+.gitignore
+
+# Lokale Datenbank + Secrets dürfen niemals ins Image
+packages/server/data
+*.sqlite
+*.sqlite-journal
+.env
+.env.*
+
+# Nicht laufzeitrelevant
+docs
+.claude
+*.log
+.DS_Store
+.vscode
+.idea
+Dockerfile
+.dockerignore
+README.md
+CLAUDE.md

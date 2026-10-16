@@ -1,0 +1,804 @@
+.app {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.app__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px;
+  z-index: 2000; /* über allem, auch über gezogenen Karten */
+  pointer-events: none;
+  transform: scale(var(--chrome-scale));
+  transform-origin: top left;
+}
+
+.app__bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px 7px 8px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  pointer-events: auto;
+}
+
+.app__title {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: var(--ink);
+}
+
+/* Das Overlay ist klick-durchlässig; Hamburger und Menü holen sich die Zeiger zurück. */
+.hamburger {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  font-size: 19px;
+  line-height: 1;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.hamburger:hover {
+  background: var(--brand-tint);
+  border-color: var(--brand);
+}
+
+.menu {
+  pointer-events: auto;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  animation: menu-in 0.14s ease-out;
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.menu__item {
+  padding: 9px 14px;
+  border-radius: 7px;
+  font-size: 14px;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.menu__sep {
+  margin: 4px 6px;
+  border: none;
+  border-top: 1px solid var(--line);
+}
+
+.menu__item:hover {
+  background: var(--brand-tint);
+  color: var(--brand-dark);
+}
+
+.menu__langs {
+  display: flex;
+  gap: 4px;
+  padding: 0 6px 2px;
+}
+
+.menu__lang {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.menu__lang:hover {
+  background: var(--brand-tint);
+  border-color: var(--brand);
+  color: var(--brand-dark);
+}
+
+.menu__lang.is-active {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+  cursor: default;
+}
+
+.app__hint {
+  display: block;
+  width: fit-content;
+  max-width: 460px;
+  margin: 0;
+  padding: 8px 13px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.45;
+  pointer-events: none; /* unter dem Hinweis sollen Gruppen aufziehbar bleiben */
+}
+
+.app__hint strong {
+  color: var(--brand-dark);
+  letter-spacing: 1px;
+}
+
+/* position: relative = Anker des Hilfe-Popovers. */
+.app__task {
+  position: relative;
+  /* backdrop-filter erzeugt einen Stapelkontext; ohne z-index läge das Popover unter den
+     nachfolgenden Overlay-Elementen (Sitzungs-Hinweis). */
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  width: fit-content;
+  max-width: 360px;
+  margin: 0;
+  padding: 11px 15px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-left: 4px solid var(--brand);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  pointer-events: none; /* unter der Aufgabe sollen Gruppen aufziehbar bleiben */
+}
+
+.app__task-text {
+  margin: 0;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.app__task-text strong {
+  font-weight: 700;
+}
+
+/* Hover-Zone aus Button + Popover. Der Wrapper ist bewusst OHNE position, damit sich das
+   Popover an .app__task ausrichtet; als DOM-Kind schließt es beim Hineinfahren nicht. */
+.help {
+  display: inline-flex;
+  pointer-events: auto; /* die Pille selbst ist klick-durchlässig */
+}
+
+.help-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 11px 4px 5px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--ink-soft);
+  cursor: pointer;
+  touch-action: manipulation; /* kein Tap-Delay auf Tablets */
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.help-btn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-pill);
+  background: var(--brand-tint);
+  color: var(--brand-dark);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.help-btn:hover,
+.help-btn.is-open {
+  background: var(--brand-tint);
+  border-color: var(--brand);
+  color: var(--brand-dark);
+}
+
+.help-btn:hover .help-btn__icon,
+.help-btn.is-open .help-btn__icon {
+  background: var(--brand);
+  color: #fff;
+}
+
+/* Absolut, damit das Aufklappen die Pille nicht auseinanderzieht. */
+.help-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 1;
+  pointer-events: auto;
+  width: max-content;
+  max-width: 340px;
+  padding: 11px 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.45;
+  animation: menu-in 0.14s ease-out;
+}
+
+.help-popover p {
+  margin: 0;
+}
+
+.help-popover p + p {
+  margin-top: 8px;
+}
+
+/* Muss über Menü und Aktionsleiste (beide z-index 2000) liegen und alle Zeiger abfangen. */
+.resume {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgb(0 0 0 / 45%);
+}
+
+.resume__box {
+  width: min(460px, 100%);
+  padding: clamp(20px, 2.4vw, 32px);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  color: var(--ink);
+}
+
+.resume__title {
+  margin: 0 0 10px;
+  font-size: clamp(18px, 1.9vw, 24px);
+  font-weight: 800;
+}
+
+.resume__text {
+  margin: 0 0 20px;
+  font-size: clamp(14px, 1.3vw, 17px);
+  line-height: 1.5;
+}
+
+.resume__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.resume__actions .btn-submit,
+.resume__actions .btn-handover {
+  width: 100%;
+  font-size: clamp(14px, 1.2vw, 18px);
+  font-weight: 700;
+  padding: clamp(11px, 1.1vw, 16px) clamp(10px, 1vw, 16px);
+}
+
+@media (max-width: 420px) {
+  .resume__actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+.app__actions {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  transform: scale(var(--chrome-scale));
+  transform-origin: bottom right;
+}
+
+.submit-msg {
+  padding: clamp(7px, 0.7vw, 12px) clamp(12px, 1vw, 18px);
+  border-radius: var(--radius);
+  font-size: clamp(13px, 1.1vw, 19px);
+  font-weight: 500;
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+  animation: msg-in 0.18s ease-out;
+}
+
+@keyframes msg-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.submit-msg--error {
+  color: var(--danger);
+  border: 1px solid #ef9a9a;
+  background: var(--danger-tint);
+}
+
+.submit-msg--success {
+  color: var(--brand-dark);
+  border: 1px solid #a5d6a7;
+  background: var(--brand-tint);
+}
+
+.btn-submit {
+  font: inherit;
+  font-size: clamp(15px, 1.6vw, 28px);
+  font-weight: 700;
+  color: #fff;
+  background: var(--brand);
+  border: none;
+  border-radius: clamp(10px, 0.8vw, 16px);
+  padding: clamp(11px, 1.1vw, 20px) clamp(24px, 2.4vw, 48px);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: background 0.15s, transform 0.08s, box-shadow 0.15s;
+}
+
+.btn-submit:hover {
+  background: var(--brand-dark);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-submit:active {
+  transform: translateY(1px);
+}
+
+.handover {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: min(520px, calc(100vw - 36px));
+}
+
+.handover__ask {
+  grid-column: 1 / -1;
+  text-align: right;
+  padding: 0 4px;
+  font-size: clamp(13px, 1.1vw, 19px);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.handover .btn-submit,
+.handover .btn-handover {
+  width: 100%;
+  font-size: clamp(14px, 1.3vw, 22px);
+  font-weight: 700;
+  padding: clamp(11px, 1.1vw, 20px) clamp(10px, 1vw, 20px);
+  border-radius: clamp(10px, 0.8vw, 16px);
+}
+
+.btn-handover {
+  font: inherit;
+  font-size: clamp(13px, 1.2vw, 21px);
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: clamp(10px, 0.8vw, 16px);
+  padding: clamp(11px, 1.1vw, 20px) clamp(16px, 1.6vw, 32px);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: background 0.15s, transform 0.08s, box-shadow 0.15s;
+}
+
+.btn-handover:hover {
+  background: var(--bg);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-handover:active {
+  transform: translateY(1px);
+}
+
+.btn-handover--danger {
+  color: #fff;
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+.btn-handover--danger:hover {
+  background: var(--danger);
+  filter: brightness(0.94);
+}
+
+.canvas {
+  position: fixed;
+  inset: 0;
+  background-color: #e8ece9;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.canvas__world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  touch-action: none;
+  box-sizing: border-box;
+  background-color: #fafbfa;
+  background-image: radial-gradient(circle, #e1e7e2 1.2px, transparent 1.2px);
+  background-size: 26px 26px;
+  border: 1px solid #d4dbd5;
+  border-radius: 4px;
+  box-shadow: 0 8px 30px rgba(20, 40, 28, 0.12);
+}
+
+/* === Karte ============================================================ */
+/* Clippt NICHT, damit das Pin-Badge herausragen kann; geclippt wird in .card__body. */
+.card {
+  position: absolute;
+  width: 96px;
+  height: 96px;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: width 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.card:active {
+  cursor: grabbing;
+}
+
+.card__body {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 3px solid #9e9e9e;
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+
+.card:hover .card__body {
+  box-shadow: var(--shadow-md);
+}
+
+.card__img {
+  flex: 0 0 90px;
+  width: 90px;
+  height: 90px;
+  align-self: center;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.card--open {
+  cursor: grab;
+}
+
+.card--open .card__body {
+  box-shadow: var(--shadow-lg);
+}
+
+/* In beiden Zuständen dieselbe Breite (siehe Card.tsx), sonst bricht der Text während der
+   Animation neu um. */
+.card__text {
+  flex: 0 0 var(--card-text-w, 254px);
+  width: var(--card-text-w, 254px);
+  margin: 0;
+  padding: 8px 14px;
+  font-size: 13px;
+  line-height: 1.38;
+  color: var(--ink);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 0.2s ease 0.05s,
+    transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) 0.03s;
+}
+
+.card--open .card__text {
+  opacity: 1;
+  transform: none;
+}
+
+.card__pin {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  color: #9aa39c;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  pointer-events: auto;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.card__pin:hover {
+  color: var(--brand);
+  border-color: var(--brand);
+}
+
+.card__pin.is-pinned {
+  color: #fff;
+  background: var(--brand);
+  border-color: var(--brand);
+}
+
+/* === Gruppenrahmen ==================================================== */
+.frame {
+  position: absolute;
+  z-index: 0;
+  border: 2px solid var(--frame-color, #9e9e9e);
+  border-radius: 12px;
+  box-sizing: border-box;
+  background: color-mix(in srgb, var(--frame-color, #9e9e9e) 9%, transparent);
+  cursor: move;
+  transition: background 0.15s;
+}
+
+.frame__header {
+  position: absolute;
+  top: -16px;
+  left: 12px;
+  z-index: 4; /* über den Resize-Zonen, damit der Name editierbar bleibt */
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: calc(100% - 20px);
+  padding: 2px 6px 2px 10px;
+  background: var(--surface);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
+}
+
+/* box-shadow statt border, damit die Pille nicht springt. */
+.frame__header--invalid {
+  box-shadow: var(--shadow-sm), 0 0 0 2px var(--danger);
+}
+
+.frame__name {
+  border: none;
+  background: transparent;
+  font: 700 16px var(--font);
+  min-width: 0;
+  padding: 0;
+  color: var(--frame-color, var(--ink));
+}
+
+.frame__name:focus {
+  outline: none;
+}
+
+.frame__name::placeholder {
+  color: #9aa5a0;
+  font-weight: 500;
+  opacity: 1;
+}
+
+.frame__name-sizer {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  visibility: hidden;
+  white-space: pre;
+  font: 700 16px var(--font);
+}
+
+.frame__delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 1.5px solid var(--frame-color, #9e9e9e);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--frame-color, #777);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.12s, color 0.15s, border-color 0.15s;
+}
+
+.frame__delete:hover {
+  background: var(--danger-tint);
+  border-color: var(--danger);
+  color: var(--danger);
+  transform: scale(1.1);
+}
+
+/* Rand → Resize, Innenfläche → Verschieben. Karten liegen darüber und haben Vorrang. */
+.frame__h {
+  position: absolute;
+  z-index: 2;
+}
+
+.frame__h--n {
+  top: -6px;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  cursor: ns-resize;
+}
+.frame__h--s {
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  cursor: ns-resize;
+}
+.frame__h--w {
+  left: -6px;
+  top: 0;
+  width: 12px;
+  height: 100%;
+  cursor: ew-resize;
+}
+.frame__h--e {
+  right: -6px;
+  top: 0;
+  width: 12px;
+  height: 100%;
+  cursor: ew-resize;
+}
+
+.frame__h--nw,
+.frame__h--ne,
+.frame__h--sw,
+.frame__h--se {
+  width: 16px;
+  height: 16px;
+  z-index: 3;
+}
+.frame__h--nw {
+  top: -6px;
+  left: -6px;
+  cursor: nwse-resize;
+}
+.frame__h--ne {
+  top: -6px;
+  right: -6px;
+  cursor: nesw-resize;
+}
+.frame__h--sw {
+  bottom: -6px;
+  left: -6px;
+  cursor: nesw-resize;
+}
+.frame__h--se {
+  bottom: -6px;
+  right: -6px;
+  cursor: nwse-resize;
+}
+
+.frame-draft {
+  position: absolute;
+  z-index: 1;
+  border: 2px dashed #9aa39c;
+  border-radius: 12px;
+  box-sizing: border-box;
+  background: rgba(40, 80, 56, 0.05);
+  pointer-events: none;
+}
+
+/* .canvas__world bildet durch seinen Transform einen eigenen Stacking-Context, der gegen die 900
+   hier immer verliert. Deshalb darf der Container selbst keine Zeiger abfangen: Sein Kasten bliebe
+   sonst auch bei leerem Stapel als unsichtbare Sperrfläche über abgelegten Karten liegen. */
+.stack {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 96px;
+  height: 96px;
+  z-index: 900;
+  pointer-events: none;
+  transform: scale(var(--ui-scale));
+  transform-origin: top right;
+}
+
+.card--stacked {
+  top: 0;
+  right: 0;
+  pointer-events: auto;
+}
+
+/* === Zoom-Bedienelemente ============================================== */
+.canvas-zoom {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transform: scale(var(--chrome-scale));
+  transform-origin: bottom left;
+}
+
+.canvas-zoom button {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.canvas-zoom button:hover:not(:disabled) {
+  background: var(--brand-tint);
+  border-color: var(--brand);
+}
+
+.canvas-zoom button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.canvas-zoom__reset {
+  font-size: 12px !important;
+  font-variant-numeric: tabular-nums;
+}

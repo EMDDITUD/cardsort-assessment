@@ -1,0 +1,35 @@
+[
+  {
+    "key": "lernverfahren",
+    "role": "tiefenstruktur",
+    "label": { "de": "Lernverfahren", "en": "Learning method" },
+    "categories": [
+      { "key": "klassifikation", "label": { "de": "Klassifikation", "en": "Classification" }, "color": "#009EE0" },
+      { "key": "regression", "label": { "de": "Regression", "en": "Regression" }, "color": "#6AB023" },
+      { "key": "clustering", "label": { "de": "Clustering", "en": "Clustering" }, "color": "#93107E" },
+      { "key": "verstaerkend", "label": { "de": "Verstärkendes Lernen", "en": "Reinforcement learning" }, "color": "#00305E" }
+    ]
+  },
+  {
+    "key": "domaene",
+    "role": "oberflaeche",
+    "label": { "de": "Anwendungsdomäne", "en": "Application domain" },
+    "categories": [
+      { "key": "industrie", "label": { "de": "Industrie & Wirtschaft", "en": "Industry & business" }, "color": "#cb7a5d" },
+      { "key": "natur", "label": { "de": "Natur & Umwelt", "en": "Nature & environment" }, "color": "#4b691a" },
+      { "key": "gesundheit", "label": { "de": "Gesundheit", "en": "Health" }, "color": "#c661dc" },
+      { "key": "verkehr", "label": { "de": "Verkehr", "en": "Transport" }, "color": "#3c49cc" }
+    ]
+  },
+  {
+    "key": "darstellung",
+    "role": "oberflaeche",
+    "label": { "de": "Darstellungsform", "en": "Data representation" },
+    "categories": [
+      { "key": "text", "label": { "de": "Text", "en": "Text" }, "color": "#7d5da2" },
+      { "key": "strukturiert", "label": { "de": "Strukturierte Daten", "en": "Structured data" }, "color": "#269573" },
+      { "key": "audio", "label": { "de": "Audio", "en": "Audio" }, "color": "#f85996" },
+      { "key": "grafik", "label": { "de": "Grafik", "en": "Images" }, "color": "#914234" }
+    ]
+  }
+]
