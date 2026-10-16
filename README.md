@@ -4,7 +4,16 @@ A digital card sorting tool for the formative assessment of students' conceptual
 
 ## Getting started
 
-Requires **Node.js ≥ 22.5** (for the built-in `node:sqlite`). npm workspaces monorepo: `packages/client` (React/Vite), `packages/server` (Fastify + SQLite), `packages/shared` (data model, card set). Run all commands from the repository root.
+Requires **Node.js ≥ 22.13** (for the unflagged built-in `node:sqlite` and `--env-file-if-exists`). npm workspaces monorepo: `packages/client` (React/Vite), `packages/server` (Fastify + SQLite), `packages/shared` (data model, card set). Run all commands from the repository root.
+
+**Configuration**
+
+```
+cp .env.example .env
+openssl rand -hex 32   # paste the result as MASTER_TOKEN into .env
+```
+
+`npm run dev` and `npm start` load `.env` from the repository root if it exists; variables already set in the environment take precedence. Without `.env`, the defaults below apply. `.env` is git-ignored – never commit it.
 
 **Development**
 
@@ -20,15 +29,25 @@ Open <http://localhost:5173>. Vite proxies `/api` and `/health` to the server.
 ```
 npm ci
 npm run build      # builds the client into packages/client/dist
-NODE_ENV=production MASTER_TOKEN=<secret> DB_PATH=/var/lib/cardsort/db.sqlite npm start
+npm start          # set NODE_ENV=production, MASTER_TOKEN and DB_PATH in .env or the environment
 ```
 
-The server then serves client and API together on <http://localhost:3001>. Put a reverse proxy with TLS in front of it. Alternatively, build the image from the included `Dockerfile` and pass the same environment variables.
+The server then serves client and API together on <http://localhost:3001>. Put a reverse proxy with TLS in front of it.
+
+**Docker**
+
+`.env` is excluded from the image (`.dockerignore`); pass the variables at runtime instead. The image already sets `NODE_ENV=production`.
+
+```
+docker build -t cardsort .
+docker run -p 3001:3001 --env-file .env -e DB_PATH=/data/db.sqlite -v cardsort-data:/data cardsort
+```
 
 | Variable | Default | Purpose |
 |---|---|---|
 | `NODE_ENV` | – | Set to `production`: suppresses startup links containing admin keys and the master token, and request logging. |
 | `PORT` / `HOST` | `3001` / `0.0.0.0` | Bind port and address. |
+| `CLIENT_URL` | `http://localhost:5173` | Public client URL, used for the links logged at startup. |
 | `DB_PATH` | `packages/server/data/ml-sortiertool.sqlite` | SQLite file; place it on persistent storage outside the repository. |
 | `MASTER_TOKEN` | generated on first start | Secret for the cross-session research view (`/?master=<token>`). If unset, a token is generated and stored in the database. |
 
