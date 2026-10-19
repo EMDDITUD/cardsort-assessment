@@ -13,7 +13,7 @@ cp .env.example .env
 openssl rand -hex 32   # paste the result as MASTER_TOKEN into .env
 ```
 
-`npm run dev` and `npm start` load `.env` from the repository root if it exists; variables already set in the environment take precedence. Without `.env`, the defaults below apply. `.env` is git-ignored – never commit it.
+`npm run dev` and `npm start` load `.env` from the repository root if it exists; a `MASTER_TOKEN` already set in the environment takes precedence. `.env` holds only `MASTER_TOKEN`; all other settings are passed as environment variables. `.env` is git-ignored – never commit it.
 
 **Development**
 
@@ -29,19 +29,10 @@ Open <http://localhost:5173>. Vite proxies `/api` and `/health` to the server.
 ```
 npm ci
 npm run build      # builds the client into packages/client/dist
-npm start          # set NODE_ENV=production, MASTER_TOKEN and DB_PATH in .env or the environment
+NODE_ENV=production DB_PATH=/var/lib/cardsort/db.sqlite npm start   # MASTER_TOKEN from .env
 ```
 
-The server then serves client and API together on <http://localhost:3001>. Put a reverse proxy with TLS in front of it.
-
-**Docker**
-
-`.env` is excluded from the image (`.dockerignore`); pass the variables at runtime instead. The image already sets `NODE_ENV=production`.
-
-```
-docker build -t cardsort .
-docker run -p 3001:3001 --env-file .env -e DB_PATH=/data/db.sqlite -v cardsort-data:/data cardsort
-```
+The server then serves client and API together on <http://localhost:3001>. Put a reverse proxy with TLS in front of it. Alternatively, build the image from the included `Dockerfile` and pass the same environment variables; `.env` is not copied into the image, so pass `MASTER_TOKEN` at runtime, e.g. with `docker run --env-file .env`.
 
 | Variable | Default | Purpose |
 |---|---|---|
